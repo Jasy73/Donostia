@@ -1,0 +1,209 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donostia - El Desenlace</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 25px; /* Reducido a 25px */
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+      z-index: 2;
+    }
+
+    .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 15px 25px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 20px;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9em;
+    }
+
+    .nav a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 4px;
+      font-size: 0.9em;
+    }
+
+    .nav-icons a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .back-arrow {
+      position: absolute;
+      top: 50%;
+      left: 25px;
+      transform: translateY(-50%);
+      font-size: 2.4em;
+      color: #fff;
+      text-decoration: none;
+      z-index: 2;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 245, 230, 0.9);
+      padding: 20px;
+      text-align: center;
+      width: 400px;
+      border-radius: 10px;
+      opacity: 0;
+      animation: fadeInSlideUp 1s forwards;
+    }
+
+    @keyframes fadeInSlideUp {
+      from {
+        opacity: 0;
+        clip-path: inset(100% 0 0 0);
+      }
+      to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    .content h1 {
+      font-size: 2.5em;
+      color: #000;
+      margin: 0 0 10px;
+      animation: slideUpText 1s forwards;
+      animation-delay: 0.2s;
+    }
+
+    .content p {
+      font-size: 1.2em;
+      color: #333;
+      line-height: 1.5;
+      margin: 0 0 20px;
+      animation: slideUpText 1s forwards;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes slideUpText {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="video-background">
+    <source src="https://secure.webpublication.es/273624/1667377.mp4" type="video/mp4" />
+  </video>
+  <img src="https://i.postimg.cc/xTzwBCsv/milogo.png" alt="Donostia Logo" class="logo" />
+  <div class="header">
+    <div class="nav">
+      <a href="#">Sumario</a>
+      <a href="https://jasy73.github.io/Donostia/">1. LA CIUDAD</a>
+      <a href="#">2. EL ELENCO</a>
+      <a href="#" style="font-weight: bold; text-decoration: underline;">3. EL DESENLACE</a>
+    </div>
+    <div class="nav-icons">
+      <a href="#">🔍</a>
+      <a href="#">✉️</a>
+      <a href="#">📘</a>
+      <a href="#">📎</a>
+      <a href="#">🔽</a>
+      <a href="#">🖨️</a>
+    </div>
+  </div>
+  <a href="https://jasy73.github.io/Donostia/" class="back-arrow">◄</a>
+  <div class="content">
+    <h1>El Desenlace</h1>
+    <p>
+      San Sebastián: sus barrios, sus gentes, su cultura... Son un teatro para los cinco sentidos donde las personas que nos visitan con respeto y ganas de vivir la auténtica Donostia recibirán una cálida acogida por parte de los y las donostiarras durante cualquiera de las 365 oportunidades...
+    </p>
+  </div>
+</body>
+</html>
