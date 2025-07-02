@@ -2,218 +2,148 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Los Motivos - Donostia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donostia San Sebastián - Cuaderno de Viaje</title>
   <style>
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body, html {
       height: 100%;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       overflow: hidden;
     }
 
-    .background-video {
+    /* Video de fondo */
+    .video-bg {
       position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      z-index: -1;
     }
 
-    .header {
-      position: fixed;
+    /* Barra superior */
+    .top-bar {
+      position: absolute;
       top: 0;
+      left: 0;
       width: 100%;
-      height: 50px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255,255,255,0.6);
+      color: black;
+      font-size: 0.9rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 6px 20px;
+      align-items: center;
+      padding: 5px 20px;
       z-index: 10;
     }
 
-    .logo {
+    .top-bar .left,
+    .top-bar .right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .top-bar .left img {
       height: 30px;
     }
 
-    .menu-container {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav {
-      display: flex;
-      gap: 18px;
-      font-size: 14px;
-      color: #000;
-    }
-
-    .nav span {
-      cursor: default;
-    }
-
-    .nav a {
+    .top-bar a {
+      color: black;
       text-decoration: none;
-      color: inherit;
     }
 
-    .nav a:hover {
-      text-decoration: underline;
-    }
-
-    .nav span.active {
-      text-decoration: underline;
-      font-weight: bold;
-    }
-
-    .icons {
-      display: flex;
-      gap: 4px;
-      font-size: 16px;
-    }
-
-    .content {
+    /* Contenido central */
+    .centered {
       position: absolute;
-      bottom: 40px;
-      left: 40px;
-      max-width: 500px;
-      color: #000;
-      z-index: 2;
-      background: rgba(255, 225, 240, 0.6);
-      padding: 30px;
-      border-radius: 10px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
     }
 
-    .text-box h1 {
-      font-size: 48px;
+    .logo-box {
+      background: white;
+      padding: 20px;
+      display: inline-block;
+      border-radius: 10px;
       margin-bottom: 20px;
     }
 
-    .text-box p {
-      font-size: 18px;
-      line-height: 1.6;
+    .logo-box img {
+      width: 100px;
+      height: auto;
+      display: block;
     }
 
-    .arrow {
-      position: fixed;
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1.2em;
+      font-weight: 300;
+      margin-top: 10px;
+    }
+
+    /* Flecha blanca sin cola hacia la derecha */
+    .arrow-right {
+      position: absolute;
       top: 50%;
+      right: 30px;
       transform: translateY(-50%);
-      font-size: 42px;
+      font-size: 40px;
       color: white;
-      background: none;
-      border: none;
-      z-index: 5;
       cursor: pointer;
-      user-select: none;
-      line-height: 1;
+      z-index: 10;
+      transition: transform 0.2s ease;
+      text-decoration: none; /* Elimina la línea debajo */
     }
 
-    .arrow.left {
-      left: 20px;
-    }
-
-    .arrow.right {
-      right: 20px;
-    }
-
-    .arrow:hover {
-      opacity: 0.7;
-    }
-
-    @media (max-width: 768px) {
-      .text-box h1 {
-        font-size: 36px;
-      }
-
-      .content {
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
-        max-width: none;
-        padding: 20px;
-      }
-
-      .nav {
-        font-size: 12px;
-        gap: 10px;
-      }
-
-      .icons {
-        font-size: 14px;
-        gap: 4px;
-      }
-
-      .arrow {
-        font-size: 36px;
-      }
+    .arrow-right:hover {
+      transform: translateY(-50%) scale(1.1);
     }
   </style>
 </head>
 <body>
 
   <!-- Video de fondo -->
-  <video autoplay muted loop class="background-video">
-    <source src="https://secure.webpublication.es/273624/1625512.mp4" type="video/mp4">
-    Tu navegador no soporta video HTML5.
+  <video class="video-bg" autoplay muted loop>
+    <source src="https://secure.webpublication.es/273624/1710247.mp4" type="video/mp4">
+    Tu navegador no soporta el video HTML5.
   </video>
 
-  <!-- Cabecera -->
-  <div class="header">
-    <img src="img/milogo.png" alt="Logo Donostia" class="logo" />
-
-    <div class="menu-container">
-      <div class="nav">
-        <span>Sumario</span>
-        <a href="https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1">1. LA CIUDAD</a>
-        <span class="active">2. LOS MOTIVOS</span>
-        <span>3. EL DESENLACE</span>
-      </div>
-
-      <div class="icons">
-        <span>🔍</span>
-        <span>✉️</span>
-        <span>📘</span>
-        <span>📎</span>
-        <span>🔽</span>
-        <span>🖨️</span>
-      </div>
+  <!-- Barra superior -->
+  <div class="top-bar">
+    <div class="left">
+      <img src="https://i.postimg.cc/xTzwBCsv/milogo.png" alt="Logo Donostia" />
+      <span><a href="#">ES</a> | <a href="#">EN</a> | <a href="#">FR</a> | <a href="#">EUS</a></span>
+    </div>
+    <div class="right">
+      <span><a href="#">Sumario</a></span>
+      <span><a href="#" style="font-weight: bold; text-decoration: underline;">1. LA CIUDAD</a></span>
+      <span><a href="https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1">2. LOS MOTIVOS</a></span>
+      <span><a href="#">3. EL DESENLACE</a></span>
+      <span>🔍 ✉️ 📘 📎 🔽 🖨️</span>
     </div>
   </div>
-
-  <!-- Flechas de navegación -->
-  <div class="arrow left" onclick="retroceder()">&#9664;</div>
-  <div class="arrow right" onclick="avanzar()">&#9654;</div>
 
   <!-- Contenido principal -->
-  <div class="content">
-    <div class="text-box">
-      <h1>Los Motivos</h1>
-      <p>
-        Hay tantos motivos para vivir San Sebastián como días en el año.<br />
-        El ocio y el día a día encuentran su motivación en todo lo que Donostia ofrece.
-      </p>
+  <div class="centered">
+    <div class="logo-box">
+      <img src="https://www.emagister.com/assets/es/logos/centro/id/1169132/size/l.jpg" alt="Logo Donostia" />
     </div>
+    <h1>Donostia<br>San Sebastián</h1>
+    <h2>CUADERNO DE VIAJE</h2>
   </div>
 
-  <!-- Scripts de navegación -->
-  <script>
-    function retroceder() {
-      window.location.href = "https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1";
-    }
-
-    function avanzar() {
-      window.location.href = "https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1";
-    }
-  </script>
+  <!-- Flecha blanca sin cola hacia la derecha -->
+  <a href="https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1" class="arrow-right">▶</a>
 
 </body>
 </html>
