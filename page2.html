@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Los Motivos - Donostia</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .background-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 20px;
+      z-index: 10;
+    }
+
+    .logo {
+      height: 30px;
+    }
+
+    .menu-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .nav span {
+      cursor: default;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
+    .nav span.active {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .icons {
+      display: flex;
+      gap: 4px;
+      font-size: 16px;
+    }
+
+    .content {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      max-width: 500px;
+      color: #000;
+      z-index: 2;
+      background: rgba(255, 225, 240, 0.6);
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .text-box h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .text-box p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 42px;
+      color: white;
+      background: none;
+      border: none;
+      z-index: 5;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .arrow.left {
+      left: 20px;
+    }
+
+    .arrow.right {
+      right: 20px;
+    }
+
+    .arrow:hover {
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .text-box h1 {
+        font-size: 36px;
+      }
+
+      .content {
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        max-width: none;
+        padding: 20px;
+      }
+
+      .nav {
+        font-size: 12px;
+        gap: 10px;
+      }
+
+      .icons {
+        font-size: 14px;
+        gap: 4px;
+      }
+
+      .arrow {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video de fondo -->
+  <video autoplay muted loop class="background-video">
+    <source src="https://secure.webpublication.es/273624/1625512.mp4" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+
+  <!-- Cabecera -->
+  <div class="header">
+    <img src="img/milogo.png" alt="Logo Donostia" class="logo" />
+
+    <div class="menu-container">
+      <div class="nav">
+        <span>Sumario</span>
+        <a href="https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1">1. LA CIUDAD</a>
+        <span class="active">2. LOS MOTIVOS</span>
+        <span>3. EL DESENLACE</span>
+      </div>
+
+      <div class="icons">
+        <span>🔍</span>
+        <span>✉️</span>
+        <span>📘</span>
+        <span>📎</span>
+        <span>🔽</span>
+        <span>🖨️</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flechas de navegación -->
+  <div class="arrow left" onclick="retroceder()">&#9664;</div>
+  <div class="arrow right" onclick="avanzar()">&#9654;</div>
+
+  <!-- Contenido principal -->
+  <div class="content">
+    <div class="text-box">
+      <h1>Los Motivos</h1>
+      <p>
+        Hay tantos motivos para vivir San Sebastián como días en el año.<br />
+        El ocio y el día a día encuentran su motivación en todo lo que Donostia ofrece.
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts de navegación -->
+  <script>
+    function retroceder() {
+      window.location.href = "https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1";
+    }
+
+    function avanzar() {
+      window.location.href = "https://secure.webpublication.es/273624/.cuaderno.de.viaje/#page=1";
+    }
+  </script>
+
+</body>
+</html>
